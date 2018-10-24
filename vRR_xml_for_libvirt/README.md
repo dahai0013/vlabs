@@ -1,7 +1,5 @@
-# Demo BGP Optimal Route Reflection
+# vLabs set up:  4x vRR in a square
 
-
-https://dahai0013.atlassian.net/wiki/spaces/JUN/pages/483655715/bgp-orr+or+BGP+Optimal+Route+Reflection
 
 
 ## Getting Started
