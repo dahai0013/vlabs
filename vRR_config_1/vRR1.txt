@@ -1,0 +1,47 @@
+set version 18.2R1-S3.2
+set system root-authentication encrypted-password "$6$DsVuXYmV$znjnsxs9AFBpGXJVbgSDqQx2peA9olRsriV2YD2l5veMhKpjVNzBYKVgNziUdpJZ8V67xI.GIZGC7NH.Pmcp5."
+set system host-name vRR1
+set system services ssh root-login allow
+set system syslog user * any emergency
+set system syslog file messages any notice
+set system syslog file messages authorization info
+set system syslog file interactive-commands interactive-commands any
+set system processes dhcp-service traceoptions file dhcp_logfile
+set system processes dhcp-service traceoptions file size 10m
+set system processes dhcp-service traceoptions level all
+set system processes dhcp-service traceoptions flag packet
+set interfaces em0 unit 0 family inet address 192.168.0.3/24
+set interfaces em1 vlan-tagging
+set interfaces em1 unit 10 vlan-id 10
+set interfaces em1 unit 10 family inet address 10.11.12.11/24
+set interfaces em1 unit 10 family iso
+set interfaces em1 unit 20 vlan-id 20
+set interfaces em1 unit 20 family inet address 20.11.13.11/24
+set interfaces em1 unit 20 family iso
+set interfaces em2 unit 0 family inet address 10.11.13.11/24
+set interfaces em2 unit 0 family iso
+set interfaces em3 unit 0 family inet address 10.11.14.11/24
+set interfaces em3 unit 0 family iso
+set interfaces lo0 unit 0 family inet address 11.11.11.11/32
+set interfaces lo0 unit 0 family iso address 49.0001.0000.0000.a000.00
+set routing-options autonomous-system 65432
+set routing-options confederation 13037
+set routing-options confederation members 65432
+set routing-options confederation members 65431
+set protocols bgp group iBGP type internal
+set protocols bgp group iBGP local-address 11.11.11.11
+set protocols bgp group iBGP neighbor 13.13.13.13
+set protocols bgp group iBGP neighbor 14.14.14.14
+set protocols bgp group bgp-orr type internal
+set protocols bgp group bgp-orr local-address 11.11.11.11
+set protocols bgp group bgp-orr cluster 11.11.11.11
+set protocols bgp group bgp-orr optimal-route-reflection igp-primary 12.12.12.12
+set protocols bgp group bgp-orr neighbor 12.12.12.12
+set protocols isis level 2 wide-metrics-only
+set protocols isis level 1 disable
+set protocols isis interface em1.10 level 2 metric 1000
+set protocols isis interface em1.20 level 2 metric 1000
+set protocols isis interface lo0.0 passive
+set policy-options policy-statement LOAD_BALANCE then load-balance per-packet
+set policy-options policy-statement injectpolicy1 term injectterm1 from protocol static
+set policy-options policy-statement injectpolicy1 term injectterm1 then accept
